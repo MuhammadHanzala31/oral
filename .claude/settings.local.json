@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:kube.io)",
+      "Bash(claude skill:*)",
+      "Bash(claude plugin:*)",
+      "Read(//c/Users/HAROON TRADERS/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.5.0/.claude/skills/ui-ux-pro-max/**)",
+      "Bash(python scripts/search.py \"aviation oral exam evaluator cinematic dark glass immersive premium\" --design-system -p \"OralEval\" -f markdown)",
+      "Bash(py --version)",
+      "Bash(py3 --version)",
+      "Bash(where python:*)",
+      "Bash(\"C:\\\\Users\\\\HAROON TRADERS\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\\\\python.exe\" --version)"
+    ]
+  }
+}

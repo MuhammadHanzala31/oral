@@ -1,4 +1,4 @@
-import OralEvaluationClient from './oral-evaluation/OralEvaluationClient';
+import OralEvaluationClient from './OralEvaluationClient';
 
 export const metadata = {
   title: 'Oral Evaluation',
