@@ -22,13 +22,13 @@ const FEEDBACK = {
 // ─── Tokens ───────────────────────────────────────────────────────────────────
 const F = {
   display: "var(--font-bebas), 'Bebas Neue', sans-serif",
-  serif:   "'Georgia', 'Times New Roman', serif",
-  body:    "var(--font-dm), 'DM Sans', system-ui, sans-serif",
+  serif: "'Georgia', 'Times New Roman', serif",
+  body: "var(--font-dm), 'DM Sans', system-ui, sans-serif",
 } as const;
 
 const C = {
-  silver:  'linear-gradient(160deg,#5a5a5a 0%,#a8a8a8 18%,#e0e0e0 36%,#ffffff 50%,#e8e8e8 62%,#b8b8b8 78%,#d0d0d0 100%)',
-  orange:  'linear-gradient(135deg,#e07010 0%,#f09030 45%,#ea6800 100%)',
+  silver: 'linear-gradient(160deg,#5a5a5a 0%,#a8a8a8 18%,#e0e0e0 36%,#ffffff 50%,#e8e8e8 62%,#b8b8b8 78%,#d0d0d0 100%)',
+  orange: 'linear-gradient(135deg,#e07010 0%,#f09030 45%,#ea6800 100%)',
   orangeH: 'linear-gradient(135deg,#f08020 0%,#ffa040 45%,#f07010 100%)',
   // iOS 26 glass surfaces — lighter, more translucent
   g0: 'rgba(255,255,255,0.10)',  // outer panel
@@ -74,16 +74,16 @@ function LiquidFilters() {
 function ios26(blur = 16, extra: CSSProperties = {}): CSSProperties {
   return {
     position: 'relative',
-    background: C.g1,
-    backdropFilter: `url(#gCard) blur(${blur}px) saturate(1.9) brightness(1.12)`,
-    WebkitBackdropFilter: `url(#gCard) blur(${blur}px) saturate(1.9) brightness(1.12)`,
-    border: `1px solid ${C.b1}`,
-    boxShadow: [
-      '0 4px 24px rgba(0,0,0,0.28)',
-      'inset 0 1.5px 0 rgba(255,255,255,0.32)',
-      'inset 0 -1px 0 rgba(255,255,255,0.06)',
-      '0 1px 0 rgba(0,0,0,0.12)',
-    ].join(', '),
+    background: 'transparent',
+    // backdropFilter: `url(#gCard) blur(${blur}px) saturate(1.9) brightness(1.12)`,
+    // WebkitBackdropFilter: `url(#gCard) blur(${blur}px) saturate(1.9) brightness(1.12)`,
+    // border: `1px solid ${C.b1}`,
+    // boxShadow: [
+    //   '0 4px 24px rgba(0,0,0,0.28)',
+    //   'inset 0 1.5px 0 rgba(255,255,255,0.32)',
+    //   'inset 0 -1px 0 rgba(255,255,255,0.06)',
+    //   '0 1px 0 rgba(0,0,0,0.12)',
+    // ].join(', '),
     borderRadius: 20,
     overflow: 'hidden',
     ...extra,
@@ -95,7 +95,7 @@ function TopEdge({ opacity = 0.45 }: { opacity?: number }) {
   return (
     <div aria-hidden="true" style={{
       position: 'absolute', top: 0, left: '6%', right: '6%', height: 1,
-      background: `linear-gradient(90deg,transparent,rgba(255,255,255,${opacity * 0.5}),rgba(255,255,255,${opacity}),rgba(255,255,255,${opacity * 0.5}),transparent)`,
+      // background: `linear-gradient(90deg,transparent,rgba(255,255,255,${opacity * 0.5}),rgba(255,255,255,${opacity}),rgba(255,255,255,${opacity * 0.5}),transparent)`,
       pointerEvents: 'none', zIndex: 4,
     }} />
   );
@@ -136,12 +136,15 @@ function Btn({ label, onClick, v = 'ghost' }: { label: string; onClick: () => vo
   const [pr, setPr] = useState(false);
   const s: Record<V, CSSProperties> = {
     orange: {
-      background: ho ? C.orangeH : C.orange,
+      background: 'transparent',
       color: '#fff',
-      border: '1px solid rgba(255,165,60,0.30)',
-      boxShadow: ho
-        ? '0 4px 20px rgba(240,110,14,0.52),inset 0 1.5px 0 rgba(255,225,170,0.28)'
-        : '0 4px 14px rgba(220,90,8,0.38),inset 0 1.5px 0 rgba(255,210,150,0.18)',
+      fontSize: '30px',
+      width : '300px',
+      margin : 'auto'
+      // border: '1px solid rgba(255,165,60,0.30)',
+      // boxShadow: ho
+      //   ? '0 4px 20px rgba(240,110,14,0.52),inset 0 1.5px 0 rgba(255,225,170,0.28)'
+      //   : '0 4px 14px rgba(220,90,8,0.38),inset 0 1.5px 0 rgba(255,210,150,0.18)',
     },
     glass: {
       background: ho ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.10)',
@@ -150,6 +153,7 @@ function Btn({ label, onClick, v = 'ghost' }: { label: string; onClick: () => vo
       backdropFilter: 'blur(12px)',
       WebkitBackdropFilter: 'blur(12px)',
       boxShadow: 'inset 0 1.5px 0 rgba(255,255,255,0.20)',
+    
     },
     ghost: {
       background: ho ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)',
@@ -192,9 +196,7 @@ function AnswerField({ value, onChange }: { value: string; onChange: (v: string)
       {/* Prismatic focus ring */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: -1, borderRadius: 19, pointerEvents: 'none', zIndex: 0,
-        background: focused
-          ? 'conic-gradient(from 200deg,rgba(255,255,255,0.36) 0deg,rgba(200,215,245,0.22) 90deg,rgba(230,235,255,0.28) 180deg,rgba(210,222,250,0.22) 270deg,rgba(255,255,255,0.36) 360deg)'
-          : 'rgba(255,255,255,0.10)',
+        background: 'transparent',
         transition: 'background 0.28s ease',
       }} />
       <div aria-hidden="true" style={{
@@ -215,15 +217,17 @@ function AnswerField({ value, onChange }: { value: string; onChange: (v: string)
           position: 'relative', zIndex: 1,
           display: 'block', width: '100%', boxSizing: 'border-box',
           resize: 'none', borderRadius: 18, padding: '14px 18px',
-          fontFamily: F.body, fontSize: 14, lineHeight: 1.68, fontWeight: 300,
-          background: focused ? 'rgba(255,255,255,0.13)' : 'rgba(255,255,255,0.08)',
-          backdropFilter: `url(#gTx) blur(14px) saturate(2.0) brightness(${focused ? 1.18 : 1.10})`,
-          WebkitBackdropFilter: `url(#gTx) blur(14px) saturate(2.0) brightness(${focused ? 1.18 : 1.10})`,
+          fontFamily: F.body, fontSize: 24, lineHeight: 1.68, fontWeight: 300,
+          // background: focused ? 'rgba(255,255,255,0.13)' : 'rgba(255,255,255,0.08)',
+          background: 'tranparent',
+          textAlign: 'center',
+          // backdropFilter: `url(#gTx) blur(14px) saturate(2.0) brightness(${focused ? 1.18 : 1.10})`,
+          // WebkitBackdropFilter: `url(#gTx) blur(14px) saturate(2.0) brightness(${focused ? 1.18 : 1.10})`,
           border: 'none', outline: 'none',
-          color: C.text0,
-          boxShadow: focused
-            ? 'inset 0 2px 8px rgba(0,0,0,0.14), 0 0 0 0.5px rgba(255,255,255,0.20)'
-            : 'inset 0 2px 6px rgba(0,0,0,0.12)',
+          color: 'white',
+          // boxShadow: focused
+          //   ? 'inset 0 2px 8px rgba(0,0,0,0.14), 0 0 0 0.5px rgba(255,255,255,0.20)'
+          //   : 'inset 0 2px 6px rgba(0,0,0,0.12)',
           caretColor: 'rgba(245,130,28,0.90)',
           transition: 'background 0.24s ease, box-shadow 0.24s ease',
         }}
@@ -234,8 +238,8 @@ function AnswerField({ value, onChange }: { value: string; onChange: (v: string)
 
 // ─── Left step tracker ────────────────────────────────────────────────────────
 const STEPS: Array<{ id: Phase; num: number; title: string; sub: string }> = [
-  { id: 'question', num: 1, title: 'Question',  sub: 'Read & Answer'   },
-  { id: 'feedback', num: 2, title: 'Feedback',  sub: 'Review Results'  },
+  { id: 'question', num: 1, title: 'Question', sub: 'Read & Answer' },
+  { id: 'feedback', num: 2, title: 'Feedback', sub: 'Review Results' },
 ];
 
 function StepTracker({ phase }: { phase: Phase }) {
@@ -250,9 +254,9 @@ function StepTracker({ phase }: { phase: Phase }) {
       {/* Step list */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'center', width: '100%' }}>
         {STEPS.map((step, i) => {
-          const done    = i < activeIdx;
+          const done = i < activeIdx;
           const current = i === activeIdx;
-          const future  = i > activeIdx;
+          const future = i > activeIdx;
 
           return (
             <div key={step.id} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -360,19 +364,21 @@ function QuestionPhase({ answer, setAnswer, onSubmit, onSkip, onMark }: {
     <div>
       {/* Heading */}
       <div style={{ marginBottom: 22 }}>
-        <h1 style={{
+        {/* <h1 style={{
           margin: '0 0 8px', fontFamily: F.display,
           fontSize: 'clamp(58px, 9vw, 96px)', fontWeight: 400, letterSpacing: '0.10em', lineHeight: 0.95,
           color: 'rgba(255,255,255,0.96)',
           textShadow: '0 2px 24px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.20)',
         }}>
           Oral Evaluation
-        </h1>
+        </h1> */}
         <p style={{
           margin: 0,
           fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
-          fontSize: 'clamp(15px, 2.2vw, 20px)', fontWeight: 400, fontStyle: 'italic', letterSpacing: '0.04em',
-          color: 'rgba(255,165,55,0.95)',
+          fontSize: '30px', fontWeight: 600, fontStyle: 'italic', letterSpacing: '0.04em',
+          color: 'orange',
+          textAlign: 'center',
+
           textShadow: '0 1px 12px rgba(215,92,8,0.50), 0 0 32px rgba(240,110,10,0.25)',
         }}>
           {QUESTION.topic}
@@ -380,12 +386,12 @@ function QuestionPhase({ answer, setAnswer, onSubmit, onSkip, onMark }: {
       </div>
 
       {/* Question card */}
-      <div style={ios26(14, { marginBottom: 12 })}>
+      <div style={ios26(14, { marginBottom: 12 })} className='w-[800px] mx-auto'>
         <TopEdge opacity={0.42} />
         <div style={{ padding: '20px 24px' }}>
           <label htmlFor="answer-field" style={{
-            display: 'block', fontFamily: F.body, fontSize: 14, lineHeight: 1.76,
-            color: C.text0, fontWeight: 300,
+            display: 'block', fontFamily: F.body, fontSize: 30, lineHeight: 1.76,
+            color: 'cyan', fontWeight: 500, textAlign: 'center'
           }}>
             {QUESTION.text}
           </label>
@@ -395,9 +401,8 @@ function QuestionPhase({ answer, setAnswer, onSubmit, onSkip, onMark }: {
       <AnswerField value={answer} onChange={setAnswer} />
 
       <div style={{ display: 'flex', gap: 8 }}>
-        <Btn label="Submit" onClick={onSubmit} v="orange" />
-        <Btn label="Skip"   onClick={onSkip}   v="ghost"  />
-        <Btn label="Mark for Review" onClick={onMark} v="glass" />
+        <Btn label="Evaluate" onClick={onSubmit} v="orange" />
+        {/* <Btn label="Mark for Review" onClick={onMark} v="glass" /> */}
       </div>
     </div>
   );
@@ -451,8 +456,8 @@ function FeedbackPhase({ onContinue, onReviewLater }: { onContinue: () => void; 
       </div>
 
       <div style={{ display: 'flex', gap: 8 }}>
-        <Btn label="Continue"     onClick={onContinue}    v="orange" />
-        <Btn label="Review Later" onClick={onReviewLater} v="glass"  />
+        <Btn label="Continue" onClick={onContinue} v="orange" />
+        <Btn label="Review Later" onClick={onReviewLater} v="glass" />
       </div>
     </div>
   );
@@ -460,10 +465,10 @@ function FeedbackPhase({ onContinue, onReviewLater }: { onContinue: () => void; 
 
 // ─── Root ─────────────────────────────────────────────────────────────────────
 export default function OralEvaluationClient() {
-  const [phase, setPhase]   = useState<Phase>('question');
+  const [phase, setPhase] = useState<Phase>('question');
   const [answer, setAnswer] = useState('');
   const [mounted, setMounted] = useState(false);
-  const [fading, setFading]   = useState(false);
+  const [fading, setFading] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 80);
@@ -477,6 +482,7 @@ export default function OralEvaluationClient() {
 
   return (
     <>
+
       <style>{`
         ::placeholder { color: rgba(255,255,255,0.22); font-family: var(--font-dm),'DM Sans',sans-serif; }
         @media (prefers-reduced-motion: reduce) {
@@ -493,14 +499,18 @@ export default function OralEvaluationClient() {
         overflow: 'hidden', position: 'relative', padding: '24px',
         // Lighter overlays — let the background image breathe more
         backgroundImage: `
-          radial-gradient(ellipse 60% 50% at 50% 100%, rgba(18,10,3,0.70) 0%, transparent 65%),
-          radial-gradient(ellipse 45% 30% at 10% 80%,  rgba(4,10,32,0.45) 0%, transparent 55%),
-          radial-gradient(ellipse 45% 30% at 90% 80%,  rgba(4,10,32,0.45) 0%, transparent 55%),
-          linear-gradient(180deg, rgba(0,0,2,0.30) 0%, rgba(1,3,6,0.30) 100%),
-          url('/wmremove-transformed.png')
+          // radial-gradient(ellipse 60% 50% at 50% 100%, rgba(18,10,3,0.70) 0%, transparent 65%),
+          // radial-gradient(ellipse 45% 30% at 10% 80%,  rgba(4,10,32,0.45) 0%, transparent 55%),
+          // radial-gradient(ellipse 45% 30% at 90% 80%,  rgba(4,10,32,0.45) 0%, transparent 55%),
+          // linear-gradient(180deg, rgba(0,0,2,0.30) 0%, rgba(1,3,6,0.30) 100%),
+          // url('/video.mp4')
         `,
-        backgroundSize: 'cover', backgroundPosition: 'center',
+        backgroundSize: '100%', backgroundPosition: 'center',
       }}>
+
+        <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover">
+          <source src="/video.mp4" className='w-full' type="video/mp4" />
+        </video>
         {/* Fine scanline grain */}
         <div aria-hidden="true" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -511,14 +521,15 @@ export default function OralEvaluationClient() {
         {/* ── OUTER GLASS PANEL ──────────────────────────────────────────── */}
         <div style={{
           position: 'relative', zIndex: 10,
-          width: '100%', maxWidth: 860,
+          height: '90vh',
+          width: '100%',
           opacity: mounted ? 1 : 0,
           transform: mounted ? 'translateY(0) scale(1)' : 'translateY(22px) scale(0.98)',
           transition: 'opacity 0.70s cubic-bezier(0.22,1,0.36,1), transform 0.70s cubic-bezier(0.22,1,0.36,1)',
 
           // iOS 26 outer panel — lighter, vivid specular, lower blur
-          background: C.g0,
-          backdropFilter: `url(#gMain) blur(20px) saturate(2.0) brightness(1.15)`,
+          background: 'rgb(0 0 0 / 42%)',
+          // backdropFilter: `url(#gMain) blur(20px) saturate(2.0) brightness(1.15)`,
           WebkitBackdropFilter: `url(#gMain) blur(20px) saturate(2.0) brightness(1.15)`,
           borderRadius: 28,
           border: `1px solid ${C.b1}`,
@@ -539,8 +550,9 @@ export default function OralEvaluationClient() {
             pointerEvents: 'none', zIndex: 30,
           }} />
 
+
           {/* ── LEFT: STEP TRACKER ───────────────────────────────────────── */}
-          <StepTracker phase={phase} />
+          {/* <StepTracker phase={phase} /> */}
 
           {/* ── RIGHT: EVAL CONTENT ──────────────────────────────────────── */}
           <main style={{ flex: 1, padding: '36px 36px 36px 28px', minWidth: 0, overflow: 'auto' }}>
@@ -554,7 +566,7 @@ export default function OralEvaluationClient() {
                   answer={answer} setAnswer={setAnswer}
                   onSubmit={() => go(() => setPhase('feedback'))}
                   onSkip={() => go(() => setAnswer(''))}
-                  onMark={() => go(() => {})}
+                  onMark={() => go(() => { })}
                 />
               ) : (
                 <FeedbackPhase
