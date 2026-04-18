@@ -498,19 +498,13 @@ export default function OralEvaluationClient() {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden', position: 'relative', padding: '24px',
         // Lighter overlays — let the background image breathe more
-        backgroundImage: `
-          // radial-gradient(ellipse 60% 50% at 50% 100%, rgba(18,10,3,0.70) 0%, transparent 65%),
-          // radial-gradient(ellipse 45% 30% at 10% 80%,  rgba(4,10,32,0.45) 0%, transparent 55%),
-          // radial-gradient(ellipse 45% 30% at 90% 80%,  rgba(4,10,32,0.45) 0%, transparent 55%),
-          // linear-gradient(180deg, rgba(0,0,2,0.30) 0%, rgba(1,3,6,0.30) 100%),
-          // url('/video.mp4')
-        `,
+        backgroundImage: `url('/wmremove-transformed.png')`,
         backgroundSize: '100%', backgroundPosition: 'center',
       }}>
 
-        <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover">
+        {/* <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover">
           <source src="/video.mp4" className='w-full' type="video/mp4" />
-        </video>
+        </video> */}
         {/* Fine scanline grain */}
         <div aria-hidden="true" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
